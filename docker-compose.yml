@@ -1,0 +1,35 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:latest
+    container_name: acs_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ../acsbackend/acs:/src
+      - ./config/nginx:/etc/nginx/conf.d
+    depends_on:
+      - django
+  django:
+    build: ../acsbackend/
+    container_name: acs_django
+    command: ./run/run_django.sh
+    volumes:
+      - ../acsbackend/acs:/src
+    depends_on:
+      - rabbitmq
+#      - celery
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: acs_rabbit
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  celery:
+    build: ../acsbackend/
+    container_name: acs_celery
+#    command: ./run/run_celery.sh
+    volumes:
+      - ./acsbackend:/src
+    depends_on:
+      - rabbitmq
