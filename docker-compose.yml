@@ -18,7 +18,7 @@ services:
       - ../acsbackend/acs:/src
     depends_on:
       - rabbitmq
-#      - celery
+      - celery
   rabbitmq:
     image: rabbitmq:3-management
     container_name: acs_rabbit
@@ -28,8 +28,8 @@ services:
   celery:
     build: ../acsbackend/
     container_name: acs_celery
-#    command: ./run/run_celery.sh
+    command: ./run/run_celery.sh
     volumes:
-      - ./acsbackend:/src
+      - ../acsbackend/acs:/src
     depends_on:
       - rabbitmq
