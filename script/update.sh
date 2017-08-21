@@ -9,5 +9,4 @@ git submodule update --remote
 cd frontend/acs/
 ng build -prod -op=../../acsbackend/acs/static/
 cd ../../
-sudo docker-compose stop
-sudo docker-compose start
+source $1/script/restart.sh $1

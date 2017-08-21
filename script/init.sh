@@ -5,6 +5,7 @@ then
     exit 0
 fi
 cd $1
+git submodule init
 git submodule update
 sudo docker-compose build
 cd frontend/acs/
