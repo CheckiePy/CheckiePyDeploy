@@ -1,0 +1,6 @@
+[submodule "acsbackend"]
+	path = acsbackend
+	url = https://github.com/acsproj/acsbackend.git
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/acsproj/acsfrontend.git
