@@ -6,16 +6,16 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ../acsbackend/acs:/src
+      - ./acsbackend/acs:/src
       - ./config/nginx:/etc/nginx/conf.d
     depends_on:
       - django
   django:
-    build: ../acsbackend/
+    build: ./acsbackend/
     container_name: acs_django
     command: ./run/run_django.sh
     volumes:
-      - ../acsbackend/acs:/src
+      - ./acsbackend/acs:/src
     depends_on:
       - rabbitmq
       - celery
@@ -26,10 +26,10 @@ services:
       - "5672:5672"
       - "15672:15672"
   celery:
-    build: ../acsbackend/
+    build: ./acsbackend/
     container_name: acs_celery
     command: ./run/run_celery.sh
     volumes:
-      - ../acsbackend/acs:/src
+      - ./acsbackend/acs:/src
     depends_on:
       - rabbitmq
