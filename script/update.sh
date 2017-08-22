@@ -6,6 +6,5 @@ then
 fi
 cd $1
 git submodule update --remote
-source $1/script/build_backend.sh $1
 source $1/script/build_frontend.sh $1
-sudo docker-compose up -d
+source $1/script/build_backend.sh $1

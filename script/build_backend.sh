@@ -6,4 +6,5 @@ then
 fi
 cd $1
 sudo docker-compose build
+sudo docker-compose up -d
 sudo docker-compose run django python manage.py migrate
