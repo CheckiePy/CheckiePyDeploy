@@ -10,6 +10,7 @@ services:
       - ./config/nginx:/etc/nginx/conf.d
     depends_on:
       - django
+    restart: unless-stopped
   django:
     build: ./acsbackend/
     container_name: acs_django
@@ -19,12 +20,15 @@ services:
     depends_on:
       - rabbitmq
       - celery
+      - postgres
+    restart: unless-stopped
   rabbitmq:
     image: rabbitmq:3-management
     container_name: acs_rabbit
     ports:
       - "5672:5672"
       - "15672:15672"
+    restart: unless-stopped
   celery:
     build: ./acsbackend/
     container_name: acs_celery
@@ -33,3 +37,13 @@ services:
       - ./acsbackend/acs:/src
     depends_on:
       - rabbitmq
+    restart: unless-stopped
+  postgres:
+    image: postgres:latest
+    container_name: acs_postgres
+    environment:
+      POSTGRES_USER: checkiepy
+      POSTGRES_PASSWORD: checkiepy
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    restart: unless-stopped
