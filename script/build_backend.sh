@@ -5,7 +5,6 @@ then
     exit 0
 fi
 cd $1
-source $1/script/init.sh $1 $2
-source $1/script/build_frontend.sh $1
-source $1/script/build_backend.sh $1
-
+sudo docker-compose build
+sudo docker-compose up -d
+sudo docker-compose run django python manage.py migrate
