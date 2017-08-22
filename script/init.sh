@@ -14,3 +14,4 @@ then
 else
     cp $2 acsbackend/acs/config.py
 fi
+source $1/script/copy_cert.sh $1

@@ -8,6 +8,7 @@ services:
     volumes:
       - ./acsbackend/acs:/src
       - ./config/nginx:/etc/nginx/conf.d
+      - ./cert:/cert
     depends_on:
       - django
     restart: unless-stopped
