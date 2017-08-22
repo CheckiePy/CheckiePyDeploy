@@ -6,7 +6,6 @@ then
 fi
 cd $1
 git submodule update --remote
-cd frontend/acs/
-ng build -prod -op=../../acsbackend/acs/static/
-cd ../../
+source $1/script/build_backend.sh $1
+source $1/script/build_frontend.sh $1
 source $1/script/restart.sh $1
