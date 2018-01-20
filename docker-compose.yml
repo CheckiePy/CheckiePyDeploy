@@ -7,14 +7,14 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./acsbackend/acs:/src
+      - ./backend/acs:/src
       - ./config/nginx:/etc/nginx/conf.d
       - ./cert:/cert
     depends_on:
       - django
     restart: unless-stopped
   django:
-    build: ./acsbackend/
+    build: ./backend/
     container_name: acs_django
     command: ./run/run_django.sh
     volumes:
@@ -32,11 +32,11 @@ services:
       - "15672:15672"
     restart: unless-stopped
   celery:
-    build: ./acsbackend/
+    build: ./backend/
     container_name: acs_celery
     command: ./run/run_celery.sh
     volumes:
-      - ./acsbackend/acs:/src
+      - ./backend/acs:/src
     depends_on:
       - rabbitmq
     restart: unless-stopped

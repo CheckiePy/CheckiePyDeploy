@@ -1,8 +1,8 @@
 [submodule "backend"]
 	path = backend
-	url = https://github.com/CheckiePy/ChekiePyBackend.git
+	url = https://github.com/CheckiePy/CheckiePyBackend.git
 	branch = master
 [submodule "frontend"]
 	path = frontend
-	url = https://github.com/CheckiePy/ChekiePyFrontend.git
+	url = https://github.com/CheckiePy/CheckiePyFrontend.git
 	branch = master

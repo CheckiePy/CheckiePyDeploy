@@ -1,0 +1,10 @@
+version: '3'
+services:
+  node:
+    build: ./node/
+    container_name: poll_node
+    command: /scripts/build-frontend.sh
+    volumes:
+      - ./script:/scripts
+      - ./backend/acs:/backend
+      - ./frontend/acs:/frontend
