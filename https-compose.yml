@@ -8,7 +8,7 @@ services:
       - "443:443"
     volumes:
       - ./backend/acs:/src
-      - ./config/nginx:/etc/nginx/conf.d
+      - ./nginx/https:/etc/nginx/conf.d
       - ./cert:/cert
     depends_on:
       - django
