@@ -1,0 +1,48 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:latest
+    container_name: checkiepy_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./backend/acs:/src
+      - ./nginx/http:/etc/nginx/conf.d
+    depends_on:
+      - django
+    restart: unless-stopped
+  django:
+    build: ./backend/
+    container_name: checkiepy_django
+    command: ./run/run_django.sh
+    volumes:
+      - ./backend/acs:/src
+    depends_on:
+      - celery
+      - postgres
+    restart: unless-stopped
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: checkiepy_rabbit
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    restart: unless-stopped
+  celery:
+    build: ./backend/
+    container_name: checkiepy_celery
+    command: ./run/run_celery.sh
+    volumes:
+      - ./backend/acs:/src
+    depends_on:
+      - rabbitmq
+    restart: unless-stopped
+  postgres:
+    image: postgres:9.6
+    container_name: checkiepy_postgres
+    environment:
+      POSTGRES_USER: checkiepy
+      POSTGRES_PASSWORD: checkiepy
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    restart: unless-stopped

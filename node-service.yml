@@ -1,0 +1,10 @@
+version: '3'
+services:
+  node:
+    build: ./node/
+    container_name: checkiepy_node
+    command: /src/build-frontend.sh
+    volumes:
+      - ./node:/src
+      - ./backend/acs:/backend
+      - ./frontend/acs:/frontend
