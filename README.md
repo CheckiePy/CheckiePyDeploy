@@ -26,30 +26,44 @@ sudo docker-compose -f node-service.yml build
 sudo docker-compose -f node-service.yml run node
 ```
 
-##### 1.2.4. Run the system
+##### 1.2.4 Edit hosts
+
+Details can be found in the backend documentation [here](https://github.com/CheckiePy/CheckiePyBackend#22-edit-hosts).
+
+##### 1.2.5. Provide credentials
+
+Details can be found in the backend documentation [here](https://github.com/CheckiePy/CheckiePyBackend#24-provide-credentials).
+
+##### 1.2.6. Edit NGINX config
+
+Change `server_name` in [NGINX config](/nginx/http/checkiepy.conf).
+
+##### 1.2.7. Run the system
 
 ```
 sudo docker-compose -f http-compose.yml build
 sudo docker-compose -f http-compose.yml up -d
 ```
 
-##### 1.2.5. Migrate the database
+##### 1.2.8. Migrate the database
 
 ```
-sudo docker-compose exec django python manage.py migrate
+sudo docker-compose -f http-compose.yml exec django python manage.py migrate
 ```
 
-##### 1.2.6. Collect Django static
+##### 1.2.9. Collect Django static
 
 ```
-docker-compose -f http-compose.yml exec django python manage.py collectstatic --noinput
+sudo docker-compose -f http-compose.yml exec django python manage.py collectstatic --noinput
 ```
 
-##### 1.2.7. Create a super user
+##### 1.2.10. Create a super user
 
 ```
-docker-compose -f http-compose.yml exec django python manage.py createsuperuser
+sudo docker-compose -f http-compose.yml exec django python manage.py createsuperuser
 ```
+
+##### 1.2.11. Open the application in a browser
 
 ### 2. Deploy on a remote server (with HTTPS)
 
